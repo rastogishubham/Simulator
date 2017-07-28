@@ -1,0 +1,15 @@
+Change Log
+----------
+
+- Fall 2014 (Eric Villasenor)
+  - Retabbed files
+
+- Summer/Fall 2013 (Eric Villasenor)
+  - changed filetype from dos to unix
+
+- Summer/Fall 2007 (Eric Villasenor)
+  - changed most of the asm compiler
+  - now uses mips 32 isa
+  - also maybe bugs with some instructions
+  - still need to debug
+  - added intel hex format to output

@@ -1,0 +1,9 @@
+*~
+asm
+*.o
+*.asm
+*.hex
+y.tab.h
+y.tab.c
+lex.yy.c
+y.output

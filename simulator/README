@@ -1,0 +1,27 @@
+Change Log
+----------
+
+Fall12 (Jason Holmes)
+  -Added cache simulation for single core, writes hit count to memory location
+
+Fall11 (Eric Villasenor)
+	-Undid some of the bad modifications we did in Fall09 and Spring10
+	-SW no longer invalidates link register and sc no longer invalidates its own link register
+
+Summer/Fall07 (Eric Villasenor)
+	-replaced isa with one from the 437 text (MIPS)
+	-a few extra instructions
+		-halt - to stop the processor
+		-test and set load - for multicore
+	-also maybe it is multithreaded to facilitate multicore
+	-added new mem init format: intel hex format
+	-added new output format: intel hex format
+	-added multicore functionality to sim
+
+Spring05 (Bill Nagel)
+	-replaced ldx and stx with lui and bne
+	-removed the MOVE instruction
+	-various bugfixes
+
+Fall04 (Bill Nagel)
+	-replaced bgt and bo insns with std and ldx
