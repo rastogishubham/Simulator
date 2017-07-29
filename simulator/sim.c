@@ -381,6 +381,10 @@ const char *opName (int32 op)
       return "SLL";
     case 0x020:
       return "SRL";
+    case 0x040:
+      return "SLLV";
+    case 0x060:
+      return "SRLV";
     case 0x080:
       return "JR";
     case 0x200:
@@ -1218,6 +1222,22 @@ u_int32 execute (Machine *m1, Machine *m2)
             }
             setReg (m, PC, npc);
             setReg (m, rd, getReg (m, rs) >> shamt);
+            break;
+          case 0x04: /* sllv */
+            if(m->trace)
+            {
+              printf ("%08X SLLV R%d, R%d, R%d\n", instr, rd, rs, rt);
+            }
+            setReg (m, PC, npc);
+            setReg (m, rd, getReg (m, rt) << field (getReg (m, rs), 0, 5));
+            break;
+          case 0x06: /* srlv */
+            if(m->trace)
+            {
+              printf("%08X SRLV R%d, R%d, R%d\n", instr, rd, rt, rs);
+            }  
+            setReg (m, PC, npc);
+            setReg (m, rd, getReg (m, rt) >> field (getReg (m, rs), 0, 5));
             break;
           case 0x08: /* jr */
             t_addr = getReg (m, rs);
