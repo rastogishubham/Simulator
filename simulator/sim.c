@@ -72,19 +72,19 @@ void errorHandler(char *msg)
  *-----------------------------------------------------------------------------
  */
 /* gets selected bit field from instruction */
-inline u_int32 field (u_int32 i, int32 o, int32 w)
+static u_int32 field (u_int32 i, int32 o, int32 w)
 {
   return ((i & (((1 << w) - 1) << o)) >> o);
 }
 
 /* get selected bit o from word i */
-inline u_int32 getBit (u_int32 i, int32 o)
+static u_int32 getBit (u_int32 i, int32 o)
 {
   return ((i & (1 << o)) >> o);
 }
 
 /* set selected bit o in word i */
-inline void setBit (u_int32 *i, int32 o)
+static void setBit (u_int32 *i, int32 o)
 {
   (*i) |= 1 << o;
 }
@@ -92,21 +92,21 @@ inline void setBit (u_int32 *i, int32 o)
 /* set a range of bits in word i starting at o and
  * ending sz bits later,
  * starts from lsb and masks to msb */
-inline void setRange (u_int32 *i, int32 o, int32 sz)
+static void setRange (u_int32 *i, int32 o, int32 sz)
 {
   u_int32 mask = (1 << sz) -1;
   (*i) |= mask << o;
 }
 
 /* clear selected bit o from word i */
-inline void clrBit (u_int32 *i, int32 o)
+static void clrBit (u_int32 *i, int32 o)
 {
   (*i) &= ~(1 << o);
 }
 
 /* clear range of bits in word i starting at o
  * and ending sz bits later */
-inline void clrRange (u_int32 *i, int32 o, int32 sz)
+static void clrRange (u_int32 *i, int32 o, int32 sz)
 {
   u_int32 mask = (1 << sz) -1;
   (*i) &= ~(mask << o);
@@ -114,13 +114,13 @@ inline void clrRange (u_int32 *i, int32 o, int32 sz)
 
 /* mask bit o in word i and or
  * with bit sequence v shifted o bits */
-inline void mkBit (u_int32 *i, int32 o, int32 v)
+static void mkBit (u_int32 *i, int32 o, int32 v)
 {
   *i = ((*i) & ~(1 << o)) | (v << o);
 }
 
 /* sign extent the sz'th bit in word i */
-inline void signExtend (int32 *i, int32 sz)
+static void signExtend (int32 *i, int32 sz)
 {
   if (getBit (*i, sz-1) == 1)
   {
