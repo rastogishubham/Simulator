@@ -24,7 +24,7 @@ static int label_arg;
 
 %token <token_val> kADD kADDI kADDIU kADDU kAND kANDI kBEQ kBNE
                    kJ kJAL kJR kLBU kLHU kLUI kLW kNOR kOR kORI kSLT
-                   kSLTI kSLTIU kSLTU kSLL kSRL kSB kSH kSW kSUB
+                   kSLTI kSLTIU kSLTU kSLL kSLLV kSRL kSRLV kSB kSH kSW kSUB
                    kSUBU kTSL kLL kSC kXOR kXORI kHALT kNOP kPUSH kPOP
                    kORG kCHW kCFW 
                    kNEWLINE COMMA LPAREN RPAREN
@@ -130,6 +130,7 @@ statement:  label rtype REG_NUM COMMA REG_NUM COMMA REG_NUM kNEWLINE
 rtype: kADD {$$ = kADD} | kADDU {$$ = kADDU} | kAND {$$ = kAND} | kJR {$$ = kJR}
      | kNOR {$$ = kNOR} | kOR {$$ = kOR} | kSLT {$$ = kSLT} | kSLTU {$$ = kSLTU}
      | kSUB {$$ = kSUB} | kSUBU {$$ = kSUBU} | kXOR {$$ = kXOR} | kNOP {$$ = kNOP}
+     | kSLLV {$$ = KSLLV} | kSRLV {$$ = KSRLV}
      ;
 
 rstype: kSLL {$$ = kSLL} | kSRL {$$ = kSRL}
