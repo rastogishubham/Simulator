@@ -7,6 +7,8 @@
  *
  * -Eric Villasenor email evillase@gmail.com
  *
+ * Added SLLV and SRLV instructions
+ * -Shubham Rastogi email shubhamrastogi3111995@gmail.com
  ******************************************************************************
  */
 #include <stdio.h>
