@@ -283,6 +283,12 @@ void genRType (u_int32 kop, u_int32 rd, u_int32 rs, u_int32 rt_shmt)
       case kSRL:
         packed_opcode = formR (0, rs, 0, rd, rt_shmt, 0x02);
         break;
+      case kSLLV:
+        packed_opcode = formR(0, rs, rt_shmt, rd, 0, 0x04);
+        break;
+      case kSRLV:
+        packed_opcode = formR(0, rs, rt_shmt, rd, 0, 0x06);
+        break;
       case kJR:
         packed_opcode = formR (0, rs, 0, 0, 0, 0x08);
         break;
@@ -911,6 +917,10 @@ static char *getOpcodeName (u_int32 kop)
     return ("SLL   ");
   case kSRL:
     return ("SRL   ");
+  case kSLLV:
+    return ("SLLV   ");
+  case kSRLV:
+    return ("SRLV   ");
   case kSB:
     return ("SB    ");
   case kSH:
