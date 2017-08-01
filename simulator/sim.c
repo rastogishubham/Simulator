@@ -1236,7 +1236,7 @@ u_int32 execute (Machine *m1, Machine *m2)
           case 0x06: /* srlv */
             if(m->trace)
             {
-              printf("%08X SRLV R%d, R%d, R%d\n", instr, rd, rt, rs);
+              printf("%08X SRLV R%d, R%d, R%d\n", instr, rd, rs, rt);
             }  
             setReg (m, PC, npc);
             setReg (m, rd, getReg (m, rt) >> field (getReg (m, rs), 0, 5));

@@ -130,7 +130,7 @@ statement:  label rtype REG_NUM COMMA REG_NUM COMMA REG_NUM kNEWLINE
 rtype: kADD {$$ = kADD} | kADDU {$$ = kADDU} | kAND {$$ = kAND} | kJR {$$ = kJR}
      | kNOR {$$ = kNOR} | kOR {$$ = kOR} | kSLT {$$ = kSLT} | kSLTU {$$ = kSLTU}
      | kSUB {$$ = kSUB} | kSUBU {$$ = kSUBU} | kXOR {$$ = kXOR} | kNOP {$$ = kNOP}
-     | kSLLV {$$ = KSLLV} | kSRLV {$$ = KSRLV}
+     | kSLLV {$$ = kSLLV} | kSRLV {$$ = kSRLV}
      ;
 
 rstype: kSLL {$$ = kSLL} | kSRL {$$ = kSRL}
