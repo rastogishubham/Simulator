@@ -43,7 +43,9 @@ int lineno = 0; /* start at line 0 */
 [S|s][L|l][T|t][I|i][U|u]   return (kSLTIU);
 [S|s][L|l][T|t][U|u]        return (kSLTU);
 [S|s][L|l][L|l]             return (kSLL);
+[S|s][L|l][L|l][V][v]       return (kSLLV);
 [S|s][R|r][L|l]             return (kSRL);
+[S|s][R|r][L|l][V][v]       return (kSRLV);
 [S|s][B|b]                  return (kSB);
 [S|s][H|h]                  return (kSH);
 [S|s][W|w]                  return (kSW);
