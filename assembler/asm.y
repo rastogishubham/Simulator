@@ -132,35 +132,35 @@ statement:  label rtype REG_NUM COMMA REG_NUM COMMA REG_NUM kNEWLINE
   | label kNEWLINE
   ;
 
-rtype: kADD {$$ = kADD} | kADDU {$$ = kADDU} | kAND {$$ = kAND} | kJR {$$ = kJR}
-     | kNOR {$$ = kNOR} | kOR {$$ = kOR} | kSLT {$$ = kSLT} | kSLTU {$$ = kSLTU}
-     | kSUB {$$ = kSUB} | kSUBU {$$ = kSUBU} | kXOR {$$ = kXOR} | kNOP {$$ = kNOP}
-     | kSLLV {$$ = kSLLV} | kSRLV {$$ = kSRLV}
+rtype: kADD {$$ = kADD;} | kADDU {$$ = kADDU;} | kAND {$$ = kAND;} | kJR {$$ = kJR;}
+     | kNOR {$$ = kNOR;} | kOR {$$ = kOR;} | kSLT {$$ = kSLT;} | kSLTU {$$ = kSLTU;}
+     | kSUB {$$ = kSUB;} | kSUBU {$$ = kSUBU;} | kXOR {$$ = kXOR;} | kNOP {$$ = kNOP;}
+     | kSLLV {$$ = kSLLV;} | kSRLV {$$ = kSRLV;}
      ;
 
-rstype: kSLL {$$ = kSLL} | kSRL {$$ = kSRL}
+rstype: kSLL {$$ = kSLL;} | kSRL {$$ = kSRL;}
       ;
 
-itype: kADDI {$$ = kADDI} | kADDIU {$$ = kADDIU} | kANDI {$$ = kANDI} | kBEQ {$$ = kBEQ}
-     | kBNE {$$ = kBNE} | kLBU {$$ = kLBU} | kLHU {$$ = kLHU} | kLL {$$ = kLL} | kSC {$$ = kSC}
-     | kLW {$$ = kLW} | kTSL {$$ = kTSL} | kORI {$$ = kORI} | kSLTI {$$ = kSLTI} | kSLTIU {$$ = kSLTIU}
-     | kSB {$$ = kSB} | kSH {$$ = kSH} | kSW {$$ = kSW} | kXORI {$$ = kXORI}
+itype: kADDI {$$ = kADDI;} | kADDIU {$$ = kADDIU;} | kANDI {$$ = kANDI;} | kBEQ {$$ = kBEQ;}
+     | kBNE {$$ = kBNE;} | kLBU {$$ = kLBU;} | kLHU {$$ = kLHU;} | kLL {$$ = kLL;} | kSC {$$ = kSC;}
+     | kLW {$$ = kLW;} | kTSL {$$ = kTSL;} | kORI {$$ = kORI;} | kSLTI {$$ = kSLTI;} | kSLTIU {$$ = kSLTIU;}
+     | kSB {$$ = kSB;} | kSH {$$ = kSH;} | kSW {$$ = kSW;} | kXORI {$$ = kXORI;}
      ;
 
-istype: kLUI {$$ = kLUI}
+istype: kLUI {$$ = kLUI;}
       ;
 
-btype:  kBLEZ {$$ = kBLEZ} | kBGTZ {$$ = kBGTZ}
+btype:  kBLEZ {$$ = kBLEZ;} | kBGTZ {$$ = kBGTZ;}
      ;
 
-ihtype: kHALT {$$ = kHALT}
+ihtype: kHALT {$$ = kHALT;}
       ;
 
-jtype: kJ {$$ = kJ} | kJAL {$$ = kJAL}
+jtype: kJ {$$ = kJ;} | kJAL {$$ = kJAL;}
      ;
 
 label:    LABEL_DEC { if (pass == SYMBOL_PASS) processLabel ($1); }
-  | /* nothing */ {$$ = NULL}
+  | /* nothing */ {$$ = NULL;}
   ;
 
 immediate:  INTEGER {label_arg = 0;}
