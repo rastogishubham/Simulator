@@ -48,6 +48,7 @@ static int label_arg;
 %type <token_val> rstype
 %type <token_val> itype
 %type <token_val> istype
+%type <token_val> btype
 %type <token_val> ihtype
 %type <token_val> jtype
 
@@ -91,6 +92,10 @@ statement:  label rtype REG_NUM COMMA REG_NUM COMMA REG_NUM kNEWLINE
   | label istype REG_NUM COMMA immediate kNEWLINE
     {
       genIType ($2, $3, 0, $5);
+    }
+  | label btype REG_NUM COMMA immediate kNEWLINE
+    {
+      genIType ($2, 0, $3, $5);
     }
   | label ihtype kNEWLINE
     {
@@ -142,8 +147,11 @@ itype: kADDI {$$ = kADDI} | kADDIU {$$ = kADDIU} | kANDI {$$ = kANDI} | kBEQ {$$
      | kSB {$$ = kSB} | kSH {$$ = kSH} | kSW {$$ = kSW} | kXORI {$$ = kXORI}
      ;
 
-istype: kLUI {$$ = kLUI} | kBLEZ {$$ = kBLEZ} | kBGTZ {$$ = kBGTZ}
+istype: kLUI {$$ = kLUI}
       ;
+
+btype:  kBLEZ {$$ = kBLEZ} | kBGTZ {$$ = kBGTZ}
+     ;
 
 ihtype: kHALT {$$ = kHALT}
       ;
