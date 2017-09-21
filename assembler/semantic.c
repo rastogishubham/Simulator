@@ -378,6 +378,12 @@ void genIType (u_int32 kop, u_int32 rt, u_int32 rs, u_int32 imm)
       case kBNE:
         packed_opcode = formI (0x05, rt, rs, offset);
         break;
+      case kBLEZ:
+        packed_opcode = formI (0x06, rs, 0, offset);
+        break;
+      case kBGTZ:
+        packed_opcode = formI (0x07, rs, 0, offset);
+        break;
       case kADDI:
         packed_opcode = formI (0x08, rs, rt, imm);
         break;
