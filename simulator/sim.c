@@ -417,6 +417,10 @@ const char *opName (int32 op)
       return "BEQ";
     case 0x005:
       return "BNE";
+    case 0x006:
+      return "BLEZ";
+    case 0x007:
+      return "BGTZ";
     case 0x008:
       return "ADDI";
     case 0x009:
@@ -1488,6 +1492,48 @@ u_int32 execute (Machine *m1, Machine *m2)
         else
         {
           setReg (m, PC, npc);
+        }
+        break;
+      case 0x6: /* blez itype */
+        t_addr = npc + (offset << 2);
+
+        if(m->trace)
+        {
+          printf ("%08X BLEZ R%d, %d\n", instr, rs, t_addr);
+        }
+        /* new to wrap address maybe FIXME */
+        t_addr = ((t_addr) >= (MEMSPACE_SIZE) ?
+            ((t_addr) == (MEMSPACE_SIZE) ? 0 :
+            ((t_addr)&(MEMSPACE_SIZE-1))) : (t_addr));
+        /* set pc */
+        if((int) getReg (m, rs) <= 0)
+        {
+          setReg (m, PC, t_addr);
+        }
+        else
+        {
+          setReg(m, PC, npc);
+        }
+        break;
+        case 0x7: /* bgtz itype */
+        t_addr = npc + (offset << 2);
+
+        if(m->trace)
+        {
+          printf ("%08X BGTZ R%d, %d\n", instr, rs, t_addr);
+        }
+        /* new to wrap address maybe FIXME */
+        t_addr = ((t_addr) >= (MEMSPACE_SIZE) ?
+            ((t_addr) == (MEMSPACE_SIZE) ? 0 :
+            ((t_addr)&(MEMSPACE_SIZE-1))) : (t_addr));
+        /* set pc */
+        if((int32) getReg (m, rs) > 0)
+        {
+          setReg (m, PC, t_addr);
+        }
+        else
+        {
+          setReg(m, PC, npc);
         }
         break;
       case 0x8: /* addi itype */
