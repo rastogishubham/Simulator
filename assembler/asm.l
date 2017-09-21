@@ -26,6 +26,8 @@ int lineno = 0; /* start at line 0 */
 [A|a][N|n][D|d][I|i]        return (kANDI);
 [B|b][E|e][Q|q]             return (kBEQ);
 [B|b][N|n][E|e]             return (kBNE);
+[B|b][L|l][E|e][Z|z]        return (kBLEZ);
+[B|b][G|g][T|t][Z|z]        return (kBGTZ);
 [J|j]                       return (kJ);
 [J|j][A|a][L|l]             return (kJAL);
 [J|j][R|r]                  return (kJR);
