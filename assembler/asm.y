@@ -23,7 +23,7 @@ static int label_arg;
 }
 
 %token <token_val> kADD kADDI kADDIU kADDU kAND kANDI kBEQ kBNE kBLEZ kBGTZ
-                   kJ kJAL kJR kLBU kLHU kLUI kLW kNOR kOR kORI kSLT
+                   kBGEZ kBLTZ kJ kJAL kJR kLBU kLHU kLUI kLW kNOR kOR kORI kSLT
                    kSLTI kSLTIU kSLTU kSLL kSLLV kSRL kSRLV kSB kSH kSW kSUB
                    kSUBU kTSL kLL kSC kXOR kXORI kHALT kNOP kPUSH kPOP
                    kORG kCHW kCFW 
@@ -150,7 +150,7 @@ itype: kADDI {$$ = kADDI;} | kADDIU {$$ = kADDIU;} | kANDI {$$ = kANDI;} | kBEQ 
 istype: kLUI {$$ = kLUI;}
       ;
 
-btype:  kBLEZ {$$ = kBLEZ;} | kBGTZ {$$ = kBGTZ;}
+btype:  kBLEZ {$$ = kBLEZ;} | kBGTZ {$$ = kBGTZ;} | kBGEZ {$$ = kBGEZ;} | kBLTZ {$$ = kBLTZ;}
      ;
 
 ihtype: kHALT {$$ = kHALT;}
