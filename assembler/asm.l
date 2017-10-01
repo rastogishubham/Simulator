@@ -28,6 +28,8 @@ int lineno = 0; /* start at line 0 */
 [B|b][N|n][E|e]             return (kBNE);
 [B|b][L|l][E|e][Z|z]        return (kBLEZ);
 [B|b][G|g][T|t][Z|z]        return (kBGTZ);
+[B|b][G|g][E|e][Z|z]        return (kBGEZ);
+[B|b][L|l][T|t][Z|z]        return (kBLTZ);
 [J|j]                       return (kJ);
 [J|j][A|a][L|l]             return (kJAL);
 [J|j][R|r]                  return (kJR);
