@@ -372,6 +372,12 @@ void genIType (u_int32 kop, u_int32 rt, u_int32 rs, u_int32 imm)
         /* BEQ and BNE need to swap rs and rt as they are backwards
          * -ev
          */
+      case kBGEZ:
+        packed_opcode = formI (0x01, rs, 1, offset);
+        break;
+      case kBLTZ:
+        packed_opcode = formI (0x01, rs, 0, offset);
+        break;
       case kBEQ:
         packed_opcode = formI (0x04, rt, rs, offset);
         break;
@@ -891,6 +897,14 @@ static char *getOpcodeName (u_int32 kop)
     return ("BEQ   ");
   case kBNE:
     return ("BNE   ");
+  case kBGEZ:
+    return ("BGEZ   ");
+  case kBGTZ:
+    return ("BGTZ   ");
+  case kBLEZ:
+    return ("BLEZ   ");
+  case kBLTZ:
+    return ("BLTZ   ");
   case kJ:
     return ("J     ");
   case kJAL:
