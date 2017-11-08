@@ -26,7 +26,7 @@ static int label_arg;
                    kBGEZ kBLTZ kJ kJAL kJR kLBU kLHU kLUI kLW kNOR kOR kORI kSLT
                    kSLTI kSLTIU kSLTU kSLL kSLLV kSRL kSRLV kSB kSH kSW kSUB
                    kSUBU kTSL kLL kSC kXOR kXORI kHALT kNOP kPUSH kPOP
-                   kORG kCHW kCFW 
+                   kORG kCHW kCFW kBGEZAL kBLTZAL
                    kNEWLINE COMMA LPAREN RPAREN
 
 %token <number> INTEGER
@@ -151,6 +151,7 @@ istype: kLUI {$$ = kLUI;}
       ;
 
 btype:  kBLEZ {$$ = kBLEZ;} | kBGTZ {$$ = kBGTZ;} | kBGEZ {$$ = kBGEZ;} | kBLTZ {$$ = kBLTZ;}
+     | kBLTZAL {$$ = kBLTZAL;} | kBGEZAL {$$ = kBGEZAL;}
      ;
 
 ihtype: kHALT {$$ = kHALT;}
