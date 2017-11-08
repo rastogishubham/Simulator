@@ -378,7 +378,7 @@ const char *pRegName (int32 rd)
 
 /* for the new branch instructions,
  * op is always 1, and rt changes,
- * so I shifted rt by op and added 32
+ * so I shifted rt by 4 and added op
  * -Shubham Rastogi */
 const char *opName (int32 op)
 {
@@ -386,6 +386,10 @@ const char *opName (int32 op)
   {
     case 0x000:
       return "SLL";
+    case 0x001:
+      return "BLTZ";
+    case 0x011:
+      return "BGEZ";
     case 0x020:
       return "SRL";
     case 0x040:
@@ -442,10 +446,6 @@ const char *opName (int32 op)
       return "XORI";
     case 0x00f:
       return "LUI";
-    case 0x020:
-      return "BLTZ";
-    case 0x022:
-      return "BGEZ";
     case 0x023:
       return "LW";
     case 0x024:
@@ -467,9 +467,9 @@ const char *opName (int32 op)
       return "SC";
     case 0x03f:
       return "HALT";
-    case 0x040:
+    case 0x101:
       return "BLTZAL";
-    case 0x042:
+    case 0x111:
       return "BGEZAL";
     default:
       return "????";
@@ -1207,9 +1207,9 @@ u_int32 execute (Machine *m1, Machine *m2)
     {
       m->IC[funct<<4]++; /* remember what we do for rtypes */
     }
-    else if (op == 1) /* For branch types we shift rt by op (which is 1) and add 32 */
+    else if (op == 1) /* For branch types we shift rt by 4 and add op (which is 1) */
     {
-      m->IC[(rt<<op)+32]++;
+      m->IC[(rt<<4)+op]++;
     }
     else
     {
