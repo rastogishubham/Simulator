@@ -30,6 +30,7 @@ int lineno = 0; /* start at line 0 */
 [B|b][G|g][T|t][Z|z]        return (kBGTZ);
 [B|b][G|g][E|e][Z|z]        return (kBGEZ);
 [B|b][L|l][T|t][Z|z]        return (kBLTZ);
+[B|b][L|l][T|t][Z|z]        return (kBLTZ);
 [J|j]                       return (kJ);
 [J|j][A|a][L|l]             return (kJAL);
 [J|j][R|r]                  return (kJR);
@@ -61,6 +62,9 @@ int lineno = 0; /* start at line 0 */
 
 [N|n][O|o][P|p]             return (kNOP);
 [H|h][A|a][L|l][T|t]        return (kHALT);
+
+[B|b][L|l][T|t][Z|z][A|a][L|l]  return (kBLTZAL);
+[B|b][G|g][E|e][Z|z][A|a][L|l]  return (kBGEZAL);
 
 
 [P|p][U|u][S|s][H|h]        return (kPUSH); /* Pseudo Instructions */
