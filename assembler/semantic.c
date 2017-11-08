@@ -378,6 +378,12 @@ void genIType (u_int32 kop, u_int32 rt, u_int32 rs, u_int32 imm)
       case kBLTZ:
         packed_opcode = formI (0x01, rs, 0, offset);
         break;
+      case kBGEZAL:
+        packed_opcode = formI (0x01, rs, 16, offset);
+        break;
+      case kBLTZAL:
+        packed_opcode = formI (0x01, rs, 17, offset);
+        break;
       case kBEQ:
         packed_opcode = formI (0x04, rt, rs, offset);
         break;
@@ -905,6 +911,10 @@ static char *getOpcodeName (u_int32 kop)
     return ("BLEZ   ");
   case kBLTZ:
     return ("BLTZ   ");
+  case kBLTZAL:
+    return ("BLTZAL   ");
+  case kBGEZAL:
+    return ("BGEZAL   ");
   case kJ:
     return ("J     ");
   case kJAL:
