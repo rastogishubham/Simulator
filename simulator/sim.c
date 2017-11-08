@@ -375,6 +375,11 @@ const char *pRegName (int32 rd)
  * if the op was zero i logically ored
  * it with the funct shifted 4 bits
  * thus SRL is 0x020 and so on. */
+
+/* for the new branch instructions,
+ * op is always 1, and rt changes,
+ * so I shifted rt by op and added 32
+ * -Shubham Rastogi */
 const char *opName (int32 op)
 {
   switch (op)
@@ -437,6 +442,10 @@ const char *opName (int32 op)
       return "XORI";
     case 0x00f:
       return "LUI";
+    case 0x020:
+      return "BLTZ";
+    case 0x022:
+      return "BGEZ";
     case 0x023:
       return "LW";
     case 0x024:
@@ -458,6 +467,10 @@ const char *opName (int32 op)
       return "SC";
     case 0x03f:
       return "HALT";
+    case 0x040:
+      return "BLTZAL";
+    case 0x042:
+      return "BGEZAL";
     default:
       return "????";
   }
@@ -1194,6 +1207,10 @@ u_int32 execute (Machine *m1, Machine *m2)
     {
       m->IC[funct<<4]++; /* remember what we do for rtypes */
     }
+    else if (op == 1) /* For branch types we shift rt by op (which is 1) and add 32 */
+    {
+      m->IC[(rt<<op)+32]++;
+    }
     else
     {
       m->IC[op]++;
@@ -1418,6 +1435,94 @@ u_int32 execute (Machine *m1, Machine *m2)
             break;
         }
         break;
+      case 0x1: /* b type */
+        switch (rt)
+        {
+          case 0x00: /* bltz */
+            t_addr = npc + (offset << 2);
+            if(m->trace)
+            {
+              printf ("%08X BLTZ R%d, R0, %d\n", instr, rs, t_addr);
+            }
+            /* new to wrap address maybe FIXME */
+            t_addr = ((t_addr) >= (MEMSPACE_SIZE) ?
+              ((t_addr) == (MEMSPACE_SIZE) ? 0 :
+              ((t_addr)&(MEMSPACE_SIZE-1))) : (t_addr));
+            /* set pc */
+            if ((int) getReg (m, rs) < 0)
+            {
+              setReg (m, PC, t_addr);
+            }
+            else
+            {
+              setReg (m, PC, npc);
+            }
+            break;
+          case 0x01: /* bgez */
+            t_addr = npc + (offset << 2);
+            if(m->trace)
+            {
+              printf ("%08X BGEZ R%d, R0, %d\n", instr, rs, t_addr);
+            }
+            /* new to wrap address maybe FIXME */
+            t_addr = ((t_addr) >= (MEMSPACE_SIZE) ?
+              ((t_addr) == (MEMSPACE_SIZE) ? 0 :
+              ((t_addr)&(MEMSPACE_SIZE-1))) : (t_addr));
+            /* set pc */
+            if ((int) getReg (m, rs) >= 0)
+            {
+              setReg (m, PC, t_addr);
+            }
+            else
+            {
+              setReg (m, PC, npc);
+            }
+            break;
+          case 0x10: /* bltzal */
+            t_addr = npc + (offset << 2);
+            if(m->trace)
+            {
+              printf ("%08X BLTZAL R%d, R0, %d\n", instr, rs, t_addr);
+            }
+            /* new to wrap address maybe FIXME */
+            t_addr = ((t_addr) >= (MEMSPACE_SIZE) ?
+              ((t_addr) == (MEMSPACE_SIZE) ? 0 :
+              ((t_addr)&(MEMSPACE_SIZE-1))) : (t_addr));
+            /* set pc */
+            if ((int) getReg (m, rs) < 0)
+            {
+              setReg (m, PC, t_addr);
+              setReg (m, RA, npc);
+            }
+            else
+            {
+              setReg (m, PC, npc);
+            }
+            break;
+          case 0x11: /* bgezal */
+            t_addr = npc + (offset << 2);
+            if(m->trace)
+            {
+              printf ("%08X BGEZAL R%d, R0, %d\n", instr, rs, t_addr);
+            }
+            /* new to wrap address maybe FIXME */
+            t_addr = ((t_addr) >= (MEMSPACE_SIZE) ?
+              ((t_addr) == (MEMSPACE_SIZE) ? 0 :
+              ((t_addr)&(MEMSPACE_SIZE-1))) : (t_addr));
+            /* set pc */
+            if ((int) getReg (m, rs) >= 0)
+            {
+              setReg (m, PC, t_addr);
+              setReg (m, RA, npc);
+            }
+            else
+            {
+              setReg (m, PC, npc);
+            }
+            break;
+
+        }
+        break;
       case 0x2: /* j jtype */
         t_npc = field (npc, 28, 4) << 28;
         t_addr = (t_npc | (addr << 2));
@@ -1527,7 +1632,7 @@ u_int32 execute (Machine *m1, Machine *m2)
             ((t_addr) == (MEMSPACE_SIZE) ? 0 :
             ((t_addr)&(MEMSPACE_SIZE-1))) : (t_addr));
         /* set pc */
-        if((int32) getReg (m, rs) > 0)
+        if((int) getReg (m, rs) > 0)
         {
           setReg (m, PC, t_addr);
         }
